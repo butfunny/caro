@@ -1,2 +1,4 @@
 # caro
-Caro online using socket.io
+Install Node js
+run npm install
+run node app
