@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="caro">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Caro Online</title>
@@ -25,6 +25,13 @@
     <script src="libs/js/socket.io-1.2.0.js"></script>
     <script src="libs/js/bootstrap.min.js"></script>
     <script src="libs/js/ui-bootstrap-tpls-0.13.0.js"></script>
+
+
+
+    <script src="libs/angular/app.js"></script>
+    <script src="libs/angular/login/login.js"></script>
+
+
 
 
 </head>
@@ -69,12 +76,8 @@
 
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <h1>Enter your name</h1>
-        <input class="form-control" placeholder="Enter Your Name">
-        <br>
-        <p>
-            <a class="btn btn-lg btn-primary" href="#" role="button">Play <i class="fa fa-play"></i></a>
-        </p>
+        <ui-view></ui-view>
+
     </div>
 
 </div> <!-- /container -->
