@@ -1,0 +1,12 @@
+
+<form class="form-horizontal">
+    <div class="form-group" ng-class="hasUsername ? 'has-error':''">
+        <h1>Enter your name</h1>
+        <input class="form-control" placeholder="Enter Your Name" ng-model="nickName" required>
+        <label class="control-label" ng-show="hasUsername">Your username is already exist</label>
+        <br>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-lg btn-primary" ng-click="login()" ng-disabled="!nickName ? 'disabled': ''">Play <i class="fa fa-play"></i></button>
+    </div>
+</form>

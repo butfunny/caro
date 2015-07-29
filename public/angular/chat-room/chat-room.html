@@ -1,0 +1,52 @@
+
+<h3>Chat Room</h3>
+
+<div class="row">
+    <div class="col-md-9 room-chat" id="messageBox">
+        <div style="word-wrap: break-word; width: 100%" ng-repeat="messageChat in messages">
+            <p><b>{{messageChat.username}}</b> : {{messageChat.message}}</p>
+        </div>
+        <div ng-repeat="user in UserTyping">
+            <b class="text-muted">{{user.username}} : {{user.message}}</b>
+        </div>
+    </div>
+
+    <div class="col-md-3 online-people" id="onlineBox">
+        <table class="table table-hover" style="width: 100%">
+            <thead>
+            <th><h4>Online</h4></th>
+            </thead>
+            <style>
+                .username:hover {
+                    background-color: #0d87e9;
+                    color: #ffffff;
+                }
+            </style>
+            <tbody>
+            <tr  ng-repeat="user in onlinePeople">
+                <td class="username"><p>{{user.username}}</p></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<form class="form-horizontal">
+    <div class="row " style="margin-top: 20px">
+        <div class="col-md-8 form-group">
+            <input class="form-control" placeholder="Type anything here" ng-model="message">
+        </div>
+
+        <div class="col-md-1 form-group">
+            <button class="btn btn-primary"  ng-click="chat()" ng-disabled="isTyping ? '': 'disabled'">Send</button>
+        </div>
+
+        <div class="col-md-2">
+            <button class="btn btn-info"  ng-click="findMatch()" >Find Match</button>
+        </div>
+    </div>
+</form>
+
+
+
