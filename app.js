@@ -67,6 +67,21 @@ io.on('connection', function(socket){
     socket.on('FindMatch',function(msg){
         var user = Cols.find(listUsersOnline,function(u){return u.username == socket.nickName});
         user.status = "finding";
+        for(var i = 0; i<listUsersOnline.length;i++){
+            var userWaiting = Cols.find(listUsersOnline,function(u){return u.status == "finding" && u.username != socket.nickName});
+            if(userWaiting != null){
+                user.host = socket.nickName;
+                user.player = userWaiting.username;
+                user.status = "connected";
+                userWaiting.host = socket.nickName;
+                userWaiting.player = userWaiting.username;
+                userWaiting.status = "connected";
+                break;
+            }
+        }
+
+        console.log("------------------------------");
+        console.log(listUsersOnline);
     });
 
     var updateListUsersOnline = function(){

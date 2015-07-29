@@ -7,7 +7,7 @@
 
         .factory("User", function() {
             return {
-                isLogin: true
+                isLogin: false
             };
         })
 
