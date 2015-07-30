@@ -7,10 +7,39 @@ div .room-chat{
 
 }
 
+div .chat-label{
+    height: 700px;
+    width: 320px;
+    margin-left: 15px;
+}
+
+div .chat-area{
+    border: 2px solid #8AC007;
+    padding: 20px;
+    height: 500px;
+    margin-left: 5px;
+    overflow:auto;
+    scroll-behavior: auto;
+}
+
 div .online-people{
 
     border: 2px solid #8AC007;
     padding: 20px;
     height: 500px;
     overflow:auto;
+}
+
+
+div .caro-table{
+    border: 2px solid #8AC007;
+    padding: 20px;
+    height: 700px;
+}
+
+
+
+
+.win{
+    background-color:#fbcab3;
 }

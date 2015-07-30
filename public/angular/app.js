@@ -5,7 +5,8 @@
     angular.module('caro', [
         'caro.login',
         'caro.chat-room',
-        'caro.security'
+        'caro.security',
+        'caro.caro-room'
     ])
 
         .config(function ( $urlRouterProvider) {

@@ -20,18 +20,24 @@
 
         .controller("login.ctrl",function($scope,$socket,$state,User){
             $scope.login = function(){
-                User.nickName = $scope.nickName;
                 $socket.emit('nick name',$scope.nickName);
 
             };
 
+
+            $socket.on("Login",$scope, function (data) {
+                console.log(data);
+               if(data.username == $scope.nickName){
+                   User.nickName = $scope.nickName;
+                   User.isLogin = true;
+                   $state.go('chat-room');
+               }
+            });
+
             $scope.hasUsername = false;
 
             $socket.on("ErrorNickName",$scope,function(data){
-                if(!data){
-                    User.isLogin = true;
-                    $state.go('chat-room');
-                }else{
+                if(data){
                     $scope.hasUsername = true;
                 }
             })
