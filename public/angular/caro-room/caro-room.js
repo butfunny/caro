@@ -68,10 +68,6 @@
 
 
 
-
-
-
-
         })
 
 
@@ -110,10 +106,7 @@
                     winner: "="
 
                 },
-                templateUrl: "angular/caro-room/caro-room-info.html",
-                link: function($scope, elem, attrs) {
-
-                }
+                templateUrl: "angular/caro-room/caro-room-info.html"
             };
         })
 
@@ -200,7 +193,6 @@
                                 }
                             }
 
-
                             if(pos.turn == User.nickName){
                                 $scope.yourTurn = true;
                             }
@@ -208,16 +200,11 @@
                         }
                     });
 
-
                     $socket.on("resetCaroChessBoard",$scope,function(MatchInfo){
                         if(MatchInfo.id == $stateParams.matchID){
                             CaroApi.resetChessBoard($scope.chessboardCaro);
                         }
                     });
-
-
-
-
 
                 }
             };
