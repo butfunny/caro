@@ -5,7 +5,11 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
-var Cols = require('./libs/common/common-utils.js').Cols;
+
+var mongojs = require('mongojs');
+var databaseUrl = 'localhost:27017/caroOnline';
+var collections = ['matchCaro'];
+var db = mongojs(databaseUrl, collections);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -14,103 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname+'/public'));
 
-
-var listUsersOnline = [];
-
-io.on('connection', function(socket){
-
-    socket.on('nick name', function(nickName){
-        if(!Cols.find(listUsersOnline,function(v){return v.username == nickName})){
-            socket.nickName = nickName;
-            listUsersOnline.push({username: socket.nickName});
-            updateListUsersOnline();
-            var message = {
-                username: socket.nickName,
-                message: "is joined"
-            };
-            io.emit("Message",message);
-            io.emit("ErrorNickName",false);
-
-        }else{
-            io.emit("ErrorNickName",true);
-        }
-
-
-    });
-
-    socket.on('Message Chat', function(msg){
-        var message = {
-            username: socket.nickName,
-            message: msg,
-            time: new Date()
-        };
-        io.emit("Message",message);
-
-    });
-
-    socket.on('Typing',function(msg){
-        var message = {
-            username: socket.nickName,
-            message: msg
-        };
-        io.emit('Typing',message);
-    });
-
-    socket.on('StopTyping',function(msg){
-        var message = {
-            username: socket.nickName,
-            message: msg
-        };
-        io.emit('StopTyping',message);
-    });
-
-    socket.on('FindMatch',function(msg){
-        var user = Cols.find(listUsersOnline,function(u){return u.username == socket.nickName});
-        user.status = "finding";
-        for(var i = 0; i<listUsersOnline.length;i++){
-            var userWaiting = Cols.find(listUsersOnline,function(u){return u.status == "finding" && u.username != socket.nickName});
-            if(userWaiting != null){
-                user.host = socket.nickName;
-                user.player = userWaiting.username;
-                user.status = "connected";
-                userWaiting.host = socket.nickName;
-                userWaiting.player = userWaiting.username;
-                userWaiting.status = "connected";
-                break;
-            }
-        }
-
-        console.log("------------------------------");
-        console.log(listUsersOnline);
-    });
-
-    var updateListUsersOnline = function(){
-        io.emit("Online People",listUsersOnline);
-
-    };
-
-
-    socket.on('disconnect',function(){
-        if(!socket.nickName) return;
-        listUsersOnline.splice(Cols.findIndex(listUsersOnline,function(u){return u.username == socket.nickName }),1);
-        updateListUsersOnline();
-        var message = {
-            username: socket.nickName,
-            message: "is disconnected"
-        };
-        io.emit("Message",message);
-    });
-
-
-
-});
-
-
-app.get("/api/room-chat/people-online",function(req,res){
-    res.json(listUsersOnline);
-});
-
-
+require('./controller/controller.js')(io,db,app);
 
 
 http.listen(3000, function () {

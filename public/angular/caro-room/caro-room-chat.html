@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="chat-area" id="messageBox">
+        <div style="word-wrap: break-word; width: 100%" ng-repeat="messageChat in mesCaro">
+            <p><b>{{messageChat.username}}</b> : {{messageChat.message}}</p>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top: 20px">
+    <form class="form-horizontal">
+        <div class="col-md-11 form-group" >
+            <input class="form-control" placeholder="Chat.." ng-model="message">
+        </div>
+        <div class="col-md-3 form-group">
+            <button class="btn btn-primary" ng-click="chat()">Send</button>
+        </div>
+    </form>
+
+</div>

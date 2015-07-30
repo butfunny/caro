@@ -1,0 +1,60 @@
+
+var Cols = require('../libs/common/common-utils.js').Cols;
+
+
+module.exports = function (app, socket, io, db,listUsersOnline) {
+
+
+    app.get("/api/room-chat/people-online",function(req,res){
+        res.json(listUsersOnline);
+    });
+
+    socket.on('Message Chat', function(msg){
+        var message = {
+            username: socket.nickName,
+            message: msg,
+            time: new Date()
+        };
+        io.emit("Message",message);
+
+    });
+
+    socket.on('Typing',function(msg){
+        var message = {
+            username: socket.nickName,
+            message: msg
+        };
+        io.emit('Typing',message);
+    });
+
+    socket.on('StopTyping',function(msg){
+        var message = {
+            username: socket.nickName,
+            message: msg
+        };
+        io.emit('StopTyping',message);
+    });
+
+    socket.on('FindMatch',function(msg){
+        var user = Cols.find(listUsersOnline,function(u){return u.username == socket.nickName});
+        user.status = "finding";
+        for(var i = 0; i<listUsersOnline.length;i++){
+            var userWaiting = Cols.find(listUsersOnline,function(u){return u.status == "finding" && u.username != socket.nickName});
+            if(userWaiting != null){
+                var data = {
+                    player1: socket.nickName,
+                    player2: userWaiting.username
+                };
+                db.matchCaro.insert(data,function(err,match){
+                    io.emit('HasGame',match);
+                });
+
+                delete user.status;
+                delete userWaiting.status;
+                break;
+            }
+        }
+
+    });
+
+};

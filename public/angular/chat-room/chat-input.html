@@ -1,0 +1,12 @@
+<form class="form-horizontal">
+    <div class="row " style="margin-top: 20px">
+        <div class="col-md-8 form-group">
+            <input class="form-control" placeholder="Type anything here" ng-model="message">
+        </div>
+
+        <div class="col-md-1 form-group">
+            <button class="btn btn-primary"  ng-click="chat()" ng-disabled="isTyping ? '': 'disabled'">Send</button>
+        </div>
+
+    </div>
+</form>

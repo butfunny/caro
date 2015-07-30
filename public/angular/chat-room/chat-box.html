@@ -1,0 +1,7 @@
+<div style="word-wrap: break-word; width: 100%" ng-repeat="messageChat in messages">
+    <p><b>{{messageChat.username}}</b> : {{messageChat.message}}</p>
+</div>
+<div ng-repeat="user in UserTyping">
+    <b class="text-muted">{{user.username}} : {{user.message}}</b>
+</div>
+
