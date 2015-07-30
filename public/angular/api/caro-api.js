@@ -26,7 +26,7 @@
                         if(counter == 5) {
                             x--;
                             for (var i = 0; i < 5; i++) {
-                                $('#'+x+y).addClass('win');
+                                $('#'+x+'_'+y).addClass('win');
                                 x--;
                             }
                             counter = 0;
@@ -50,7 +50,7 @@
                         if(counter == 5) {
                             y--;
                             for (var i = 0; i < 5; i++) {
-                                $('#'+x+y).addClass('win');
+                                $('#'+x+'_'+y).addClass('win');
                                 y--;
                             }
                             counter = 0;
@@ -78,7 +78,7 @@
                             x--;
                             y++;
                             for (var i = 0; i < 5; i++) {
-                                $('#'+x+y).addClass('win');
+                                $('#'+x+'_'+y).addClass('win');
                                 x--;
                                 y++;
                             }
@@ -108,7 +108,7 @@
                             x++;
                             y++;
                             for (var i = 0; i < 5; i++) {
-                                $('#'+x+y).addClass('win');
+                                $('#'+x+'_'+y).addClass('win');
                                 x++;
                                 y++;
                             }
@@ -130,16 +130,16 @@
                 disabledAllChessBoard: function(){
                     for (var i = 0; i < 16; i++) {
                         for (var j = 0; j < 16; j++) {
-                            $('#'+i+j).attr('ng-disabled',true);
+                            $('#'+i+'_'+j).attr('ng-disabled',true);
                         }
                     }
                 },
                 resetChessBoard: function(chessboardCaro,string){
                     for (var i = 0; i < 16; i++) {
                         for (var j = 0; j < 16; j++) {
-                            $('#'+i+j).removeAttr('ng-disabled');
-                            $('#'+i+j).removeClass('win');
-                            $('#'+i+j).empty();
+                            $('#'+i+'_'+j).removeAttr('ng-disabled');
+                            $('#'+i+'_'+j).removeClass('win');
+                            $('#'+i+'_'+j).empty();
                             chessboardCaro[i][j] = 0;
                         }
                     }

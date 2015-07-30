@@ -26,7 +26,6 @@
 
 
             $socket.on("Login",$scope, function (data) {
-                console.log(data);
                if(data.username == $scope.nickName){
                    User.nickName = $scope.nickName;
                    User.isLogin = true;

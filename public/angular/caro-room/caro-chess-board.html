@@ -1,7 +1,7 @@
 <table style="margin-top: 20px;margin-left: 40px; border: 1px solid">
     <tr ng-repeat="x in chessboardCaroCols">
         <td ng-repeat="y in chessboardCaroRows">
-            <div style="border: 1px solid; width: 40px; height: 40px" ng-click="click($event,x,y)" id='{{x}}{{y}}' ng-show="x >0 && y > 0">
+            <div style="border: 1px solid; width: 40px; height: 40px" ng-click="click($event,x,y)" id='{{x}}_{{y}}' ng-show="x >0 && y > 0">
             </div>
         </td>
     </tr>

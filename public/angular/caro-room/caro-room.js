@@ -27,12 +27,17 @@
 
 
             CaroApi.getMatchDetail($stateParams.matchID).success(function(info){
-                $scope.matchInfo = info;
-                if(User.nickName == $scope.matchInfo.player1){
-                    $scope.yourTurn = true;
+                if(info){
+                    $scope.matchInfo = info;
+                    if(User.nickName == $scope.matchInfo.player1){
+                        $scope.yourTurn = true;
+                    }else{
+                        $scope.yourTurn = false;
+                    }
                 }else{
-                    $scope.yourTurn = false;
+                    $state.go('login');
                 }
+
 
             });
 
@@ -40,7 +45,28 @@
             $scope.winner = "";
             $scope.restart = function(){
                 $socket.emit("resetCaroChessBoard",{id: $stateParams.matchID});
+                $scope.winner = "";
             };
+
+
+            $scope.back = function(){
+                if(window.confirm("U was playing, do u want go back to chat room?")){
+                    $socket.emit("QuitGame",{_id: $stateParams.matchID});
+                    $state.go("chat-room");
+                }
+
+            };
+
+
+
+            $socket.on("quitMatchCaro",$scope,function(MatchInfo){
+                if(MatchInfo._id == $stateParams.matchID){
+                    alert("Your rival is run awayyyy.....");
+                    $state.go('chat-room');
+                }
+            });
+
+
 
 
 
@@ -127,7 +153,7 @@
                     $scope.chessboardCaroCols = createArray(16);
 
                     $scope.click = function($event,x,y){
-                        if(!$('#'+x+y).attr('ng-disabled')){
+                        if(!$('#'+x+'_'+y).attr('ng-disabled')){
                             if($scope.yourTurn){
                                 if(User.nickName == $scope.matchInfo.player1){
                                     $socket.emit("sendPosCaro", {id: $stateParams.matchID, posX: x, posY :y,send: "X",turn: $scope.matchInfo.player2});
@@ -148,10 +174,10 @@
                         if(pos.id == $stateParams.matchID) {
                             if(pos.send == "X"){
 
-                                $('#'+pos.posX+pos.posY).html('<i class="fa fa fa-times" style="margin-left: 7px; margin-top: 3px ;font-size: 30px;color: #3e9eff"></i>');
+                                $('#'+pos.posX+'_'+pos.posY).html('<i class="fa fa fa-times" style="margin-left: 7px; margin-top: 3px ;font-size: 30px;color: #3e9eff"></i>');
                                 $scope.chessboardCaro[pos.posX][pos.posY] = 'X';
                                 $scope.$applyAsync(function () {
-                                    $('#'+pos.posX+pos.posY).attr('ng-disabled',true);
+                                    $('#'+pos.posX+'_'+pos.posY).attr('ng-disabled',true);
                                 });
 
                                 if(CaroApi.checkWin("X",$scope.chessboardCaro,pos.posX,pos.posY)){
@@ -162,10 +188,10 @@
 
                             }
                             if(pos.send == "O"){
-                                $('#'+pos.posX+pos.posY).html('<i class="fa fa-circle-o" style="margin-left: 7px; margin-top: 3px ;font-size: 30px;color: #ff2a08"></i>');
+                                $('#'+pos.posX+'_'+pos.posY).html('<i class="fa fa-circle-o" style="margin-left: 7px; margin-top: 3px ;font-size: 30px;color: #ff2a08"></i>');
                                 $scope.chessboardCaro[pos.posX][pos.posY] = 'O';
                                 $scope.$applyAsync(function () {
-                                    $('#'+pos.posX+pos.posY).attr('ng-disabled',true);
+                                    $('#'+pos.posX+'_'+pos.posY).attr('ng-disabled',true);
                                 });
 
                                 if(CaroApi.checkWin("O",$scope.chessboardCaro,pos.posX,pos.posY)){
@@ -191,24 +217,6 @@
 
 
 
-
-
-                    $socket.on("quitMatchCaro",$scope,function(MatchInfo){
-                        if(MatchInfo._id == $stateParams.matchID){
-                            ;
-                            alert("Your rival is run awayyyy.....");
-                            $state.go('chat-room');
-                        }
-                    });
-
-
-                    $scope.back = function(){
-                        if(window.confirm("U was playing, do u want go back to chat room?")){;
-                            $socket.emit("QuitGame",{_id: $stateParams.matchID});
-                            $state.go("chat-room");
-                        }
-
-                    };
 
 
                 }

@@ -36,7 +36,7 @@ module.exports = function (socket, io, db,listUsersOnline) {
         io.emit("Message",message);
         db.matchCaro.find({$or: [{player1: socket.nickName},{player2: socket.nickName}]},function(err,doc){
             if(doc.length > 0){
-                io.emit("quitMatchCaro",doc);
+                io.emit("quitMatchCaro",doc[0]);
                 db.matchCaro.remove({_id: mongojs.ObjectId(doc[0]._id)}, function (err,doc) {
                 });
             }
