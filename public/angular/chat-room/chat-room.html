@@ -1,29 +1,51 @@
-<div class="container" style="margin-top: 200px">
-    <div class="row">
-        <div class="col-md-3">
-            <h3 style="margin: 0px">Chat Room</h3>
-        </div>
-        <div class="col-md-4">
-            <button class="btn btn-info"  ng-click="findMatch()" >Find Match</button>
+<div class="container" style="margin-top: 100px">
+
+
+    <!--<div class="row" style="margin-top: 20px">-->
+        <!--<div class="col-md-9 room-chat" id="messageBox">-->
+            <!--<chat-box></chat-box>-->
+        <!--</div>-->
+
+        <!--<div class="col-md-3 online-people" id="onlineBox">-->
+            <!--<online-people></online-people>-->
+        <!--</div>-->
+
+    <!--</div>-->
+
+    <!--<chat-input></chat-input>-->
+
+    <div class="row" style="margin-bottom: 30px">
+        <div class="col-md-2">
+                <button class="btn btn-info"  ng-click="findMatch()" >Find Match</button>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4" style="margin-left: -50px">
             <button class="btn btn-primary"  ng-click="createRoom()" >Create Room</button>
         </div>
     </div>
-
-    <div class="row" style="margin-top: 20px">
-        <div class="col-md-9 room-chat" id="messageBox">
-            <chat-box></chat-box>
-        </div>
-
-        <div class="col-md-3 online-people" id="onlineBox">
-            <online-people></online-people>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="background-color: #fff">
+                    <b style="color: #f05f40; font-size: 22px">RECENT CHAT HISTORY</b>
+                </div>
+                <div class="panel-body room-chat"  id="messageBox">
+                    <chat-box></chat-box>
+                </div>
+                <!--<div class="panel-footer">-->
+                    <!--<div class="input-group">-->
+                        <!--<input type="text" class="form-control" placeholder="Enter Message">-->
+                        <!--<span class="input-group-btn">-->
+                            <!--<button class="btn btn-info" type="button">SEND</button>-->
+                        <!--</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <chat-input></chat-input>
+            </div>
         </div>
 
     </div>
 
-    <chat-input></chat-input>
 </div>
 
 

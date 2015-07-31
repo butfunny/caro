@@ -1,7 +1,5 @@
 div .room-chat{
-    border: 2px solid #8AC007;
-    padding: 20px;
-    height: 500px;
+    height: 600px;
     overflow:auto;
     scroll-behavior: auto;
 

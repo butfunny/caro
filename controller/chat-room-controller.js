@@ -10,12 +10,8 @@ module.exports = function (app, socket, io, db,listUsersOnline) {
     });
 
     socket.on('Message Chat', function(msg){
-        var message = {
-            username: socket.nickName,
-            message: msg,
-            time: new Date()
-        };
-        io.emit("Message",message);
+        msg.time = new Date();
+        io.emit("Message",msg);
 
     });
 

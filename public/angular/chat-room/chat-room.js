@@ -21,6 +21,8 @@
 
         .controller("chat-room.ctrl", function($scope,$state,$socket,ChatRoomApi,User,SecurityService) {
 
+            console.log(User);
+
             SecurityService.checkLogin().success(function(data){
                 if(data){
                     ObjectUtil.clear(User);
@@ -68,22 +70,18 @@
         })
 
 
-        .directive("chatBox", function($socket) {
+        .directive("chatBox", function($socket,User) {
             return {
                 restrict: "E",
                 templateUrl: 'angular/chat-room/chat-box.html',
                 link: function($scope, elem, attrs) {
 
-                    $scope.messages = [
-                        {
-                            username: "butfunny",
-                            message: "Welcome to caro online 1.0."
-                        }
-                    ];
-
+                    $scope.messages = [];
+                    $scope.user = User;
 
                     $socket.on('Message',$scope,function(msg){
                         $scope.messages.push( msg );
+                        console.log(msg);
                         var elem = document.getElementById('messageBox');
                         elem.scrollTop = elem.scrollHeight;
                     })
@@ -102,7 +100,12 @@
                     $scope.UserTyping = [];
 
                     $scope.chat = function () {
-                        $socket.emit('Message Chat',$scope.message);
+                        var msg = {
+                            user: User.facebook.name,
+                            avatar: User.facebook.picture.data.url,
+                            message: $scope.message
+                        };
+                        $socket.emit('Message Chat',msg);
                         $scope.message = "";
                     };
 

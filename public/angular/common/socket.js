@@ -4,6 +4,9 @@
 
     angular.module('caro.common.socket', [
     ])
+        .run(function($socket){
+
+        })
         .factory("$socket", function() {
             var socket = io();
 

@@ -8,7 +8,7 @@ module.exports = function (passport, db) {
             {
                 clientID: "932673653463379",
                 clientSecret: "ed1de97d2bcfcf20930abc9c64084af7",
-                callbackURL: 'http://localhost:3000/auth/facebook/callback',
+                callbackURL: 'http://192.168.1.14:3000/auth/facebook/callback',
                 passReqToCallback: true,
                 profileFields: ['id', 'displayName', 'photos', 'emails']
             },
