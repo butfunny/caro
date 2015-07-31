@@ -7,6 +7,14 @@ div .room-chat{
 
 }
 
+body{
+    background-color:#fff4f9;
+}
+
+head{
+    opacity: 0.6;
+}
+
 div .chat-label{
     height: 700px;
     width: 320px;

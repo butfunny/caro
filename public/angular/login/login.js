@@ -18,28 +18,8 @@
             ;
         }])
 
-        .controller("login.ctrl",function($scope,$socket,$state,User){
-            $scope.login = function(){
-                $socket.emit('nick name',$scope.nickName);
+        .controller("login.ctrl",function($scope,SecurityService){
 
-            };
-
-
-            $socket.on("Login",$scope, function (data) {
-               if(data.username == $scope.nickName){
-                   User.nickName = $scope.nickName;
-                   User.isLogin = true;
-                   $state.go('chat-room');
-               }
-            });
-
-            $scope.hasUsername = false;
-
-            $socket.on("ErrorNickName",$scope,function(data){
-                if(data){
-                    $scope.hasUsername = true;
-                }
-            })
         })
 
     ;

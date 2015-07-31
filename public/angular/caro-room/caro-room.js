@@ -26,21 +26,27 @@
             }
 
 
-            CaroApi.getMatchDetail($stateParams.matchID).success(function(info){
-                if(info){
-                    $scope.matchInfo = info;
-                    if(User.nickName == $scope.matchInfo.player1){
-                        $scope.yourTurn = true;
+            $scope.refresh = function () {
+                CaroApi.getMatchDetail($stateParams.matchID).success(function(info){
+                    if(info){
+                        $scope.matchInfo = info;
+                        if(User.nickName == $scope.matchInfo.player1){
+                            $scope.yourTurn = true;
+                        }else{
+                            if($scope.matchInfo.player2){
+                                $scope.yourTurn = false;
+                            }else{
+                                $socket.emit("JoinGame",{match_id: $stateParams.matchID,user: User.nickName});
+                            }
+                        }
                     }else{
-                        $scope.yourTurn = false;
+                        $state.go('chat-room');
                     }
-                }else{
-                    $state.go('login');
-                }
 
+                })
+            };
 
-            });
-
+            $scope.refresh();
 
             $scope.winner = "";
             $scope.restart = function(){
@@ -54,8 +60,9 @@
                     $socket.emit("QuitGame",{_id: $stateParams.matchID});
                     $state.go("chat-room");
                 }
-
             };
+
+
 
 
 
@@ -97,16 +104,24 @@
         })
 
 
-        .directive("caroRoomInfo", function() {
+        .directive("caroRoomInfo", function($socket,$stateParams) {
             return {
                 restrict: "E",
                 scope: {
                     matchInfo: "=" ,
                     yourTurn: "=",
-                    winner: "="
+                    winner: "=",
+                    refresh: "&"
 
                 },
-                templateUrl: "angular/caro-room/caro-room-info.html"
+                templateUrl: "angular/caro-room/caro-room-info.html",
+                link: function($scope,elem,attrs){
+                    $socket.on('JoinedGame',$scope, function (matchInfo) {
+                        if(matchInfo.match_id == $stateParams.matchID){
+                            $scope.refresh();
+                        }
+                    });
+                }
             };
         })
 
@@ -203,6 +218,7 @@
                     $socket.on("resetCaroChessBoard",$scope,function(MatchInfo){
                         if(MatchInfo.id == $stateParams.matchID){
                             CaroApi.resetChessBoard($scope.chessboardCaro);
+                            $scope.winner = "";
                         }
                     });
 

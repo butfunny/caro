@@ -1,29 +1,30 @@
-
-<div class="row" style="margin-bottom: 40px">
-    <div class="col-md-3">
-        <button class="btn btn-primary" ng-click="back()"><i class="fa fa-arrow-left"></i> Back To Chat Room</button>
-    </div>
-    <div class="col-md-1" style="margin-left: -50px" ng-show="winner.length > 0">
-        <button class="btn btn-warning" ng-click="restart()">Restart <i class="fa fa-refresh"></i></button>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-8 caro-table">
-       <div class="row" style=" border-bottom-width:2px;   border-bottom-style: solid; height: 40px">
-            <caro-room-info winner="winner" match-info="matchInfo" your-turn="yourTurn"></caro-room-info>
-       </div>
-
-        <div class="row">
-            <caro-chess-board match-info="matchInfo" winner="winner" your-turn="yourTurn"></caro-chess-board>
+<div class="container">
+    <div class="row" style="margin-bottom: 40px">
+        <div class="col-md-3">
+            <button class="btn btn-primary" ng-click="back()"><i class="fa fa-arrow-left"></i> Back To Chat Room</button>
+        </div>
+        <div class="col-md-1" style="margin-left: -50px" ng-show="winner.length > 0">
+            <button class="btn btn-warning" ng-click="restart()">Restart <i class="fa fa-refresh"></i></button>
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-8 caro-table">
+            <div class="row" style=" border-bottom-width:2px;   border-bottom-style: solid; height: 40px">
+                <caro-room-info winner="winner" match-info="matchInfo" your-turn="yourTurn" refresh="refresh()"></caro-room-info>
+            </div>
+
+            <div class="row">
+                <caro-chess-board match-info="matchInfo" winner="winner" your-turn="yourTurn"></caro-chess-board>
+            </div>
+        </div>
 
 
-    <div class="col-md-3 chat-label">
-        <caro-room-chat></caro-room-chat>
+
+        <div class="col-md-3 chat-label">
+            <caro-room-chat></caro-room-chat>
+
+        </div>
 
     </div>
-
 </div>

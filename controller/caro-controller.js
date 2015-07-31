@@ -1,16 +1,35 @@
 var Cols = require('../libs/common/common-utils.js').Cols;
-var mongojs = require('mongojs');
-
+var MatchCaroDao = require('../dao/match-caro-dao.js');
 
 module.exports = function (app,socket, io, db) {
 
-
+    app.post("/api/caro-room/createdMatch",function(req,res){
+        MatchCaroDao.createMatchCaro(db,{player1: req.body.user}, function (err,match) {
+            res.json(match);
+        })
+    });
 
     app.get("/api/caro-room/match/:id",function(req,res){
         var id = req.params.id;
+        if(id.length == 12){
+            MatchCaroDao.getMatchCaro(db,id,function(err,matchDetail){
+                res.json(matchDetail);
+            })
+        }else{
+            res.end();
+        }
 
-        db.matchCaro.findOne({_id: mongojs.ObjectId(id)},function(err,matchDetail){
-            res.json(matchDetail);
+
+    });
+
+
+    socket.on('JoinGame', function (info) {
+        var id = info.match_id;
+        var update = {
+            player2: info.user
+        };
+        MatchCaroDao.updateMatchCaro(db,id,update,function(err,doc){
+            io.emit('JoinedGame',{match_id: info.match_id});
         })
     });
 
@@ -19,11 +38,11 @@ module.exports = function (app,socket, io, db) {
     });
 
 
+
+
     socket.on("QuitGame",function(MatchID){
         io.emit("quitMatchCaro",MatchID);
-        db.matchCaro.remove({_id: mongojs.ObjectId(MatchID._id)}, function (err,doc) {
-
-        });
+        MatchCaroDao.removeMatchCaro(db,MatchID._id);
     });
 
 

@@ -1,25 +1,31 @@
+<div class="container" style="margin-top: 200px">
+    <div class="row">
+        <div class="col-md-3">
+            <h3 style="margin: 0px">Chat Room</h3>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-info"  ng-click="findMatch()" >Find Match</button>
+        </div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h3 style="margin: 0px">Chat Room</h3>
+        <div class="col-md-4">
+            <button class="btn btn-primary"  ng-click="createRoom()" >Create Room</button>
+        </div>
     </div>
-    <div class="col-md-4">
-        <button class="btn btn-info"  ng-click="findMatch()" >Find Match</button>
+
+    <div class="row" style="margin-top: 20px">
+        <div class="col-md-9 room-chat" id="messageBox">
+            <chat-box></chat-box>
+        </div>
+
+        <div class="col-md-3 online-people" id="onlineBox">
+            <online-people></online-people>
+        </div>
+
     </div>
+
+    <chat-input></chat-input>
 </div>
 
-<div class="row" style="margin-top: 20px">
-    <div class="col-md-9 room-chat" id="messageBox">
-       <chat-box></chat-box>
-    </div>
-
-    <div class="col-md-3 online-people" id="onlineBox">
-        <online-people></online-people>
-    </div>
-
-</div>
-
-<chat-input></chat-input>
 
 
 

@@ -19,12 +19,18 @@
             ;
         }])
 
-        .controller("chat-room.ctrl", function($scope,$state,$socket,ChatRoomApi,User) {
+        .controller("chat-room.ctrl", function($scope,$state,$socket,ChatRoomApi,User,SecurityService) {
 
+            SecurityService.checkLogin().success(function(data){
+                if(data){
+                    ObjectUtil.clear(User);
+                    ObjectUtil.copy(data,User);
+                    User.isLogin = true;
+                }else{
+                    $state.go("login");
+                }
 
-            if(!User.isLogin){
-                $state.go('login');
-            }
+            });
 
 
             ChatRoomApi.getPeopleOnline().success(function(UsersOnline){
@@ -43,6 +49,17 @@
             $scope.findMatch = function(){
                 $socket.emit('FindMatch','');
             };
+
+            $scope.user = {
+                user: User.nickName
+            };
+            
+            
+            $scope.createRoom = function () {
+                ChatRoomApi.createRoom($scope.user).success(function(match){
+                    $state.go('caro-room',{matchID: match._id});
+                })
+            }
 
 
 

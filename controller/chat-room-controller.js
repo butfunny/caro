@@ -1,6 +1,6 @@
 
 var Cols = require('../libs/common/common-utils.js').Cols;
-
+var MatchCaroDao = require('../dao/match-caro-dao.js');
 
 module.exports = function (app, socket, io, db,listUsersOnline) {
 
@@ -45,7 +45,7 @@ module.exports = function (app, socket, io, db,listUsersOnline) {
                 player1: socket.nickName,
                 player2: userWaiting.username
             };
-            db.matchCaro.insert(data,function(err,match){
+            MatchCaroDao.createMatchCaro(db,data,function(err,match){
                 io.emit('HasGame',match);
             });
             delete user.status;

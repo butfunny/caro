@@ -1,9 +1,12 @@
-<div class="col-md-4">
-    <b>{{matchInfo.player1}}</b> VS <b>{{matchInfo.player2}}</b>
+<div class="col-md-3">
+    <b>Player 1 : {{matchInfo.player1}}</b>
 </div>
-<div class="col-md-4">
+<div class="col-md-3">
+    <b>Player 2 : {{matchInfo.player2 ? matchInfo.player2: 'waiting'}}</b>
+</div>
+<div class="col-md-2">
     <b ng-show="winner.length > 0" class="text-success">{{winner}} win</b>
 </div>
-<div class="col-md-4">
+<div class="col-md-3">
     Turn: <b>{{yourTurn ? matchInfo.player1 : matchInfo.player2}} </b>
 </div>

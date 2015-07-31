@@ -1,12 +1,28 @@
 
-<form class="form-horizontal">
-    <div class="form-group" ng-class="hasUsername ? 'has-error':''">
-        <h1>Enter your name</h1>
-        <input class="form-control" placeholder="Enter Your Name" ng-model="nickName" required>
-        <label class="control-label" ng-show="hasUsername">Your username is already exist</label>
-        <br>
+<!--<div class="col-md-5">-->
+
+<!--</div>-->
+
+<header  style="margin-top: 400px">
+
+    <div class="header-content">
+        <div class="header-content-inner" >
+            <h1 style="color: #ffffff"><i class="fa fa-times"></i><i class="fa fa-circle-o"></i> Online</h1>
+            <hr>
+            <h3 style="color: #ffffff">Join us now</h3>
+            <h3 style="color: #ffffff"> <i class="fa fa-arrow-down"></i> </h3>
+            <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook">
+                <i class="fa fa-facebook"></i> Sign in with Facebook
+            </a>
+            <br>
+            <a class="btn btn-block btn-social btn-twitter">
+                <i class="fa fa-twitter"></i> Sign in with Twitter (Comming Soon)
+            </a>
+            <br>
+            <a class="btn btn-block btn-social btn-google">
+                <i class="fa fa-google-plus"></i> Sign in with google+ (Comming Soon)
+            </a>
+        </div>
     </div>
-    <div class="form-group">
-        <button class="btn btn-lg btn-primary" ng-click="login()" ng-disabled="!nickName ? 'disabled': ''">Play <i class="fa fa-play"></i></button>
-    </div>
-</form>
+</header>
+
