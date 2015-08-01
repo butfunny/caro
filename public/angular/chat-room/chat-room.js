@@ -113,15 +113,17 @@
 
                     $scope.UserTyping = [];
                     $scope.chat = function () {
+                        if($scope.message.length > 0){
+                            var msg = {
+                                user_id: User._id,
+                                user: User.name,
+                                avatar: User.avatar,
+                                message: $scope.message
+                            };
+                            $socket.emit('Message Chat',msg);
+                            $scope.message = "";
+                        }
 
-                        var msg = {
-                            user_id: User._id,
-                            user: User.name,
-                            avatar: User.avatar,
-                            message: $scope.message
-                        };
-                        $socket.emit('Message Chat',msg);
-                        $scope.message = "";
                     };
 
 
