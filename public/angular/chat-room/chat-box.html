@@ -1,43 +1,23 @@
 
 <ul class="media-list">
     <li class="media"  ng-repeat="message in messages">
-        <div style="float: right" ng-show="message.user == user.facebook.name">
-                <div class="media">
-                    <a class="pull-right">
-                        <img class="media-object img-circle " ng-src="{{message.avatar}}">
-                    </a>
-                    <div class="text-right">
-                        <b style="color: #ff5312">{{message.message}}</b>
-                        <br>
-                        <small class="text-muted">{{message.user}} | {{message.time | date : 'hh:mm:ss'}}</small>
-                    </div>
-                </div>
-        </div>
-
-        <div ng-show="message.user != user.facebook.name">
+        <div>
             <div class="media-body">
                 <div class="media">
                     <a class="pull-left">
                         <img class="media-object img-circle " ng-src="{{message.avatar}}">
                     </a>
                     <div class="media-body">
-                        <b style="color: #03d1ff">{{message.message}}</b>
+                        <b style="color: #ee4b28" ng-show="message.user_id != user._id">{{message.message}}</b>
+                        <b style="color: #080305" ng-show="message.user_id == user._id">{{message.message}}</b>
                         <br>
                         <small class="text-muted">{{message.user}} | {{message.time | date : 'hh:mm:ss'}}</small>
                     </div>
 
                 </div>
-
+            </div>
         </div>
     </li>
 
 
 </ul>
-
-<!--<div style="word-wrap: break-word; width: 100%" ng-repeat="messageChat in messages">-->
-    <!--<p><b>{{messageChat.username}}</b> : {{messageChat.message}}</p>-->
-<!--</div>-->
-<!--<div ng-repeat="user in UserTyping">-->
-    <!--<b class="text-muted">{{user.username}} : {{user.message}}</b>-->
-<!--</div>-->
-

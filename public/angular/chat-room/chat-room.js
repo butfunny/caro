@@ -21,18 +21,20 @@
 
         .controller("chat-room.ctrl", function($scope,$state,$socket,ChatRoomApi,User,SecurityService) {
 
-            console.log(User);
 
             SecurityService.checkLogin().success(function(data){
                 if(data){
                     ObjectUtil.clear(User);
                     ObjectUtil.copy(data,User);
                     User.isLogin = true;
+                    $socket.emit('Logged',User);
                 }else{
                     $state.go("login");
                 }
 
             });
+
+
 
 
             ChatRoomApi.getPeopleOnline().success(function(UsersOnline){
@@ -53,7 +55,7 @@
             };
 
             $scope.user = {
-                user: User.nickName
+                user: User._id
             };
             
             
@@ -81,7 +83,6 @@
 
                     $socket.on('Message',$scope,function(msg){
                         $scope.messages.push( msg );
-                        console.log(msg);
                         var elem = document.getElementById('messageBox');
                         elem.scrollTop = elem.scrollHeight;
                     })
@@ -90,6 +91,18 @@
         })
 
 
+        .directive("onEnter", function() {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    elem.keydown(function(keyEvent){
+                        if(keyEvent.keyCode == 13){
+                            $scope.$apply(attrs.onEnter);
+                        }
+                    })
+                }
+            };
+        })
 
         .directive("chatInput", function($socket,User) {
             return {
@@ -98,11 +111,12 @@
                 link: function($scope, elem, attrs) {
 
                     $scope.UserTyping = [];
-
                     $scope.chat = function () {
+
                         var msg = {
-                            user: User.facebook.name,
-                            avatar: User.facebook.picture.data.url,
+                            user_id: User._id,
+                            user: User.name,
+                            avatar: User.avatar,
                             message: $scope.message
                         };
                         $socket.emit('Message Chat',msg);
@@ -111,30 +125,10 @@
 
 
                     $scope.$watch("message",function(){
-                        if($scope.message && $scope.message.length > 0){
-                            $scope.isTyping = true;
-                            $socket.emit('Typing','is typing');
-                        }else{
-                            $socket.emit('StopTyping','');
-                            $scope.isTyping = false;
-                        }
+                        $scope.message && $scope.message.length > 0 ? $scope.isTyping = true : $scope.isTyping = false;
                     });
 
 
-                    $socket.on('Typing',$scope,function(UserTyping){
-
-                        if(User.nickName != UserTyping.username){
-                            if(!Cols.find($scope.UserTyping,function(u){return u.username == UserTyping.username })){
-                                $scope.UserTyping.push(UserTyping);
-                            }
-                        }
-
-                    });
-
-                    $socket.on('StopTyping',$scope,function(UserTyping){
-                        $scope.UserTyping.splice(Cols.findIndex($scope.UserTyping,function(u){return u.username == UserTyping.username }),1)
-
-                    });
 
                 }
             };
@@ -146,6 +140,8 @@
                 restrict: "E",
                 templateUrl: 'angular/chat-room/online-people.html',
                 link: function($scope, elem, attrs) {
+
+                    $scope.currentTime = new Date().getTime();
 
                     $socket.on('Online People',$scope,function(UsersOnline){
                         $scope.onlinePeople = [];

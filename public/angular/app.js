@@ -13,8 +13,6 @@
         .config(function ( $urlRouterProvider) {
             $urlRouterProvider.otherwise('/login');
 
-
-
         })
 
     ;

@@ -6,11 +6,16 @@ var mongojs = require('mongojs');
 module.exports = function(io,db,app,passport){
     var listUsersOnline = [];
 
+    //API
+    require('./user-controller.js')(app, db,passport);
 
 
-    io.on('connection', function(socket){
+    //Socket
+    io.sockets.on('connection', function(socket){
 
-        require('./user-controller.js')(app,socket, io, db,listUsersOnline,passport);
+        require('./socket/user-socket.js')(io,socket,listUsersOnline);
+        require('./socket/caro-socket.js')(io,socket,listUsersOnline);
+        require('./socket/chat-room-socket.js')(io,socket,listUsersOnline);
         require('./chat-room-controller.js')(app, socket,io,db,listUsersOnline);
         require('./caro-controller.js')(app,socket,io,db);
 

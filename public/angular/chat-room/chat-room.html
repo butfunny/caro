@@ -1,19 +1,5 @@
 <div class="container" style="margin-top: 100px">
 
-
-    <!--<div class="row" style="margin-top: 20px">-->
-        <!--<div class="col-md-9 room-chat" id="messageBox">-->
-            <!--<chat-box></chat-box>-->
-        <!--</div>-->
-
-        <!--<div class="col-md-3 online-people" id="onlineBox">-->
-            <!--<online-people></online-people>-->
-        <!--</div>-->
-
-    <!--</div>-->
-
-    <!--<chat-input></chat-input>-->
-
     <div class="row" style="margin-bottom: 30px">
         <div class="col-md-2">
                 <button class="btn btn-info"  ng-click="findMatch()" >Find Match</button>
@@ -32,19 +18,26 @@
                 <div class="panel-body room-chat"  id="messageBox">
                     <chat-box></chat-box>
                 </div>
-                <!--<div class="panel-footer">-->
-                    <!--<div class="input-group">-->
-                        <!--<input type="text" class="form-control" placeholder="Enter Message">-->
-                        <!--<span class="input-group-btn">-->
-                            <!--<button class="btn btn-info" type="button">SEND</button>-->
-                        <!--</span>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <chat-input></chat-input>
+                <div class="panel-footer">
+                    <chat-input></chat-input>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    ONLINE USERS
+                </div>
+                <div class="panel-body online-people" id="onlineBox">
+                    <online-people></online-people>
+                </div>
             </div>
         </div>
 
+
     </div>
+
 
 </div>
 

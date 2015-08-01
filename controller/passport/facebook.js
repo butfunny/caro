@@ -22,7 +22,8 @@ module.exports = function (passport, db) {
                         } else {
                             var newUser = {
                                 email: profile.emails[0].value,
-                                facebook: profile._json,
+                                social_id: profile._json.id,
+                                name:  profile._json.name,
                                 avatar: profile.photos[0].value
                             };
 

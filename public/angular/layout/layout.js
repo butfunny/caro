@@ -18,9 +18,8 @@
                 },
                 function() {
                     $body.css({'background-color': "#fafffb"});
-                    $avatar.attr('src', User.facebook.picture.data.url);
-                    $userName.html('<b>'+User.facebook.name+'</b>');
-
+                    $avatar.attr('src', User.avatar);
+                    $userName.html('<b>'+User.name+'</b>');
                 }
             );
 
