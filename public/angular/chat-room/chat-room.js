@@ -28,6 +28,9 @@
                     ObjectUtil.copy(data,User);
                     User.isLogin = true;
                     $socket.emit('Logged',User);
+                    ChatRoomApi.getPeopleOnline().success(function(UsersOnline){
+                        $scope.onlinePeople = UsersOnline;
+                    });
                 }else{
                     $state.go("login");
                 }
@@ -37,9 +40,7 @@
 
 
 
-            ChatRoomApi.getPeopleOnline().success(function(UsersOnline){
-                $scope.onlinePeople = UsersOnline;
-            });
+
 
 
 

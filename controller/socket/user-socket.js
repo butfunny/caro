@@ -1,10 +1,13 @@
 
+var userList = require("../user-list/user-list.js");
 var Cols = require('../../libs/common/common-utils.js').Cols;
+
+
 
 module.exports = function(io,socket,listUsersOnline){
 
-    var updateListUsersOnline = function () {
-        io.emit("Online People", listUsersOnline);
+    var updateListUsersOnline = function (userOnline) {
+        io.emit("Online People", userOnline);
     };
 
 
@@ -12,19 +15,17 @@ module.exports = function(io,socket,listUsersOnline){
         delete user.isLogin;
         socket.user = user;
         socket.user.timeOnline = new Date();
-        if (!Cols.find(listUsersOnline, function (v) {return v._id == user._id})) {
-            listUsersOnline.push(socket.user);
-            updateListUsersOnline();
+        if (!Cols.find(userList.getUserOnline(), function (v) {return v._id == user._id})) {
+            userList.addNewUser(socket.user);
+            updateListUsersOnline(userList.getUserOnline());
         }
     });
 
 
     socket.on('disconnect', function () {
         if(!socket.user) return;
-        listUsersOnline.splice(Cols.findIndex(listUsersOnline, function (u) {
-            return u._id = socket.user._id
-        }),1);
-        updateListUsersOnline();
+        userList.removeUser(socket.user);
+        updateListUsersOnline(userList.getUserOnline());
 
         //if (!socket.email) return;
         //listUsersOnline.splice(Cols.findIndex(listUsersOnline, function (u) {

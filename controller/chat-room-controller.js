@@ -1,12 +1,13 @@
 
 var Cols = require('../libs/common/common-utils.js').Cols;
 var MatchCaroDao = require('../dao/match-caro-dao.js');
+var userList = require("./user-list/user-list.js");
 
 module.exports = function (app, socket, io, db,listUsersOnline) {
 
 
     app.get("/api/room-chat/people-online",function(req,res){
-        res.json(listUsersOnline);
+        res.json(userList.getUserOnline());
     });
 
     socket.on('Message Chat', function(msg){
