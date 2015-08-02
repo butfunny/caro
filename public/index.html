@@ -34,6 +34,7 @@
     <script src="libs/js/bootstrap.min.js"></script>
     <script src="libs/js/ui-bootstrap-tpls-0.13.0.js"></script>
     <script src="libs/js/common-utils.js"></script>
+    <script src="libs/js/jquery.slimscroll.js"></script>
 
 
 
@@ -77,6 +78,12 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+
+
+                    <li>
+                        <a class="page-scroll"  style="color:#f05f40; margin-right: 20px" > <i class="fa "></i></a>
+                    </li>
+
                     <li>
                         <img id="avatar" class="img-circle" style="margin-top: 10px" />
                     </li>
@@ -86,6 +93,7 @@
                     <li>
                         <a class="page-scroll"  style="color:#f05f40">Logout <i class="fa fa-sign-out"></i></a>
                     </li>
+
                 </ul>
             </div>
         </div>
@@ -93,42 +101,9 @@
 
         <ui-view></ui-view>
 
-        <div class="box box-danger direct-chat direct-chat-warning " style="position: fixed; top: 70px;width:300px;left: 1050px">
-            <div class="box-header with-border">
-                <h3 class="box-title">Private Chat</h3>
-                <div class="box-tools pull-right">
-                    <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">3</span>
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                    <button class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Contacts"><i class="fa fa-comments"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-            </div>
-            <div class="box-body" style="display: block; height: 300px">
-                <div class="direct-chat-messages" >
-                    <div class="direct-chat-msg">
-                        <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                            <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-                        </div>
-                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                            Is this template really for free? That's unbelievable!
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="box-footer" style="display: block;">
-                <div class="input-group">
-                    <input type="text" maxlength="150" ng-model="message" placeholder="Max characters 150."class="form-control" on-enter="chat()">
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-warning btn-flat" ng-click="chat()" ng-disabled="isTyping ? '': 'disabled'">Send</button>
-                      </span>
-                </div>
-            </div>
-    </div>
+
 
 </div>
-
 
 </body>
 </html>

@@ -4,8 +4,8 @@
 
 </div>
 <div class="box-body" style="display: block;">
-    <div class="direct-chat-messages">
-        <div ng-repeat="message in messages">
+    <div class="direct-chat-messages" id="MessBox" style="word-wrap: break-word;">
+        <div ng-repeat="message in messages" >
             <div class="direct-chat-msg" ng-show="message.user_id == user._id">
                 <div class="direct-chat-info clearfix">
                     <span class="direct-chat-name pull-left">{{message.user}}</span>

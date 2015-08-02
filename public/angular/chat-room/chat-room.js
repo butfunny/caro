@@ -82,10 +82,18 @@
                     $scope.messages = [];
                     $scope.user = User;
 
+
                     $socket.on('Message',$scope,function(msg){
                         $scope.messages.push( msg );
-                        var elem1 = document.getElementById('messageBox');
-                        elem1.scrollTop = elem1.scrollHeight;
+                        var elem1 = document.getElementById('MessBox');
+                        elem1.scrollTop = elem1.scrollHeight + msg.length*10;
+                        $('#MessBox').slimScroll({
+                            height: '600px',
+                            alwaysVisible: false,
+                            scrollTo: elem1.scrollHeight
+
+                        });
+
                     })
                 }
             };
