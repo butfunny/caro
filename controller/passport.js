@@ -1,7 +1,7 @@
 
 var userDao = require("../dao/user-dao.js");
 
-module.exports = function (db, passport) {
+module.exports = function (db, passport,config) {
 
     passport.serializeUser(function (user, done) {
         done(null, user._id)
@@ -14,7 +14,7 @@ module.exports = function (db, passport) {
         })
     });
 
-    require('./passport/facebook.js')(passport, db);
+    require('./passport/facebook.js')(passport, db,config);
 
 
 };

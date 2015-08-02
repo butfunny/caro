@@ -84,8 +84,8 @@
 
                     $socket.on('Message',$scope,function(msg){
                         $scope.messages.push( msg );
-                        var elem = document.getElementById('messageBox');
-                        elem.scrollTop = elem.scrollHeight;
+                        var elem1 = document.getElementById('messageBox');
+                        elem1.scrollTop = elem1.scrollHeight;
                     })
                 }
             };

@@ -1,6 +1,8 @@
-<div class="input-group">
-    <input type="text" class="form-control" maxlength="150" ng-model="message" placeholder="Max characters 150." on-enter="chat()">
-    <span class="input-group-btn">
-        <button class="btn btn-info" type="button" ng-click="chat()" ng-disabled="isTyping ? '': 'disabled'">SEND</button>
-    </span>
+ <div class="box-footer" style="display: block;">
+    <div class="input-group">
+        <input type="text" maxlength="150" ng-model="message" placeholder="Max characters 150."class="form-control" on-enter="chat()">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-warning btn-flat" ng-click="chat()" ng-disabled="isTyping ? '': 'disabled'">Send</button>
+          </span>
+    </div>
 </div>

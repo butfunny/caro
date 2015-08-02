@@ -2,7 +2,7 @@ var mongojs = require('mongojs');
 var Cols = require('../libs/common/common-utils.js').Cols;
 
 
-module.exports = function (app, db, passport) {
+module.exports = function (app, db, passport,config) {
 
     app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
@@ -11,7 +11,7 @@ module.exports = function (app, db, passport) {
             passport.authenticate('facebook', {}, function (err, user) {
                 req.session.passport.user = user;
                 req.session.save();
-                res.redirect("http://192.168.1.14:3000/#/chat-room");
+                res.redirect(config.server_url + "/#/chat-room");
             })(req, res, next);
         }
     );

@@ -1,0 +1,7 @@
+{
+  "server_url": "http://192.168.0.103:3000",
+  "facebook_config": {
+    "client_id": "932673653463379",
+    "client_secret": "ed1de97d2bcfcf20930abc9c64084af7"
+  }
+}

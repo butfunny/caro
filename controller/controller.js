@@ -3,11 +3,11 @@ var Cols = require('../libs/common/common-utils.js').Cols;
 var mongojs = require('mongojs');
 
 
-module.exports = function(io,db,app,passport){
+module.exports = function(io,db,app,passport,config){
     var listUsersOnline = [];
 
     //API
-    require('./user-controller.js')(app, db,passport);
+    require('./user-controller.js')(app, db,passport,config);
 
 
     //Socket
